@@ -1,8 +1,8 @@
 package com.example.myapplication447;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,11 +20,11 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements View.OnClicklistener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText etName, etPassword, etEmail, etPhone, etId;
     Button btnCreate, btnFetch;
     RequestQueue requestQueue;
-    private static final String URL1 = "http://192.168.1.7/androidd/save.php"
+    private static final String URL1 = "http://192.168.1.7/androidd/save.php";
 
     @Override
 
@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickliste
         etEmail = findViewById(R.id.etEmail);
         etPhone = findViewById(R.id.etPhone);
         etId = findViewById(R.id.etId);
-        //buttons
+        // button
         btnCreate = findViewById(R.id.btnCreate);
-        btnFetch = findViewById(R.id.btnFrench);
+        btnFetch = findViewById(R.id.btnFetch);
     }
 
     @Override
@@ -69,12 +69,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickliste
             createuser(name,email,password,phone);
 
 
-        } else if (id == R.id.btnFrench) {
+        } else if (id == R.id.btnFetch) {
+            Intent intent = new Intent(this,MainActivity2.class);
+            intent.putExtra("id",etId.getText().toString().trim());
+            startActivity(intent);
 
         }
 
 
     }
+    //crear usuario
 
     private void createuser(final String name,final String email,final String password,final String phone) {
 
@@ -95,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickliste
                     }
                 }
         ){
-            @Nullable
+
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String>params = new HashMap<>();
